@@ -8,6 +8,9 @@ import { RouterProvider } from "react-router/dom";
 import RootLayout from "./layout/RootLayout.jsx";
 import Home from "./components/Home/Home.jsx";
 import AllProducts from "./components/AllProducts/AllProducts.jsx";
+import AuthProvider from "./context/AuthProvider.jsx";
+import Login from "./components/Login/Login.jsx";
+import Register from "./components/Register/Register.jsx";
 
 const router = createBrowserRouter([
   {
@@ -22,12 +25,22 @@ const router = createBrowserRouter([
         path: "/allProducts",
         element: <AllProducts />,
       },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
+      },
     ],
   },
 ]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>
 );
