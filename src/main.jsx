@@ -1,7 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import App from "./App.jsx";
 
 import { createBrowserRouter } from "react-router";
 import { RouterProvider } from "react-router/dom";
@@ -11,6 +10,9 @@ import AllProducts from "./components/AllProducts/AllProducts.jsx";
 import AuthProvider from "./context/AuthProvider.jsx";
 import Login from "./components/Login/Login.jsx";
 import Register from "./components/Register/Register.jsx";
+import MyProducts from "./components/MyProducts/MyProducts.jsx";
+import MyBids from "./components/MyBids/MyBids.jsx";
+import PrivateRoute from "./context/PrivateRoute.jsx";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +34,22 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/myProducts",
+        element: (
+          <PrivateRoute>
+            <MyProducts />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/myBids",
+        element: (
+          <PrivateRoute>
+            <MyBids />
+          </PrivateRoute>
+        ),
       },
     ],
   },

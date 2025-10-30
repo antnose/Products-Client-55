@@ -9,6 +9,8 @@ const Navbar = () => {
     <>
       <NavLink to={"/"}>Home</NavLink>
       <NavLink to={"/allProducts"}>All Products</NavLink>
+      <NavLink to={"/myProducts"}>My Products</NavLink>
+      <NavLink to={"/myBids"}>My Bids</NavLink>
     </>
   );
 
@@ -96,22 +98,16 @@ const Navbar = () => {
               </div>
               <ul
                 tabIndex={0}
-                className="dropdown-content z-50 menu p-2 shadow bg-base-100 rounded-box w-52 mt-4"
+                className="dropdown-content z-50 menu p-2 shadow bg-base-100 rounded-box w-52 mt-4 gap-y-4"
               >
-                <li className="px-4 py-2 border-b">
+                <Link to={"/profile"} className="px-4 py-2 border-b">
                   <span className="text-sm font-semibold">
                     {user.displayName || user.email}
                   </span>
-                </li>
-                <li>
-                  <a>My Profile</a>
-                </li>
-                <li>
-                  <a>My Bids</a>
-                </li>
-                <li>
-                  <a>Settings</a>
-                </li>
+                </Link>
+                <Link to={"/myProducts"}>My Products</Link>
+                <Link to={"/myBids"}>My Bids</Link>
+
                 <li className="border-t mt-2">
                   <button
                     onClick={handleSignOut}

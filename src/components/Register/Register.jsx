@@ -119,7 +119,7 @@ const Register = () => {
       // Optionally: Redirect user or clear form data here
     } catch (error) {
       // Handle registration failure
-      console.error("Registration failed:", error);
+      // console.error("Registration failed:", error);
 
       let errorMessage =
         error.message || "An unknown error occurred during registration.";
@@ -155,6 +155,30 @@ const Register = () => {
 
       // B. Handle the successful sign-in with SweetAlert2
       const user = userCredential.user;
+
+      // Create user in the database
+      const newUser = {
+        name: user.displayName,
+        email: user.email,
+        image: user.photoURL,
+      };
+      // --- 👇 CORRECTED FETCH CHAIN 👇 ---
+      fetch(`http://localhost:3001/users`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(newUser),
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          // console.log("User data saved to DB:", data);
+        })
+        .catch((fetchError) => {
+          // console.error("Database save failed:", fetchError);
+        });
 
       Swal.fire({
         title: "User Created Successfully",

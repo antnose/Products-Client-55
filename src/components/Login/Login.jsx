@@ -1,7 +1,7 @@
 import { use, useState } from "react";
 import { motion } from "framer-motion";
 import { Eye, EyeOff, Mail, Lock, AlertCircle } from "lucide-react";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
 import Swal from "sweetalert2";
 
@@ -13,6 +13,9 @@ const Login = () => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({});
+
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -75,6 +78,7 @@ const Login = () => {
       });
 
       // Redirect or state update goes here (e.g., navigate('/dashboard'))
+      navigate(location.state || "/");
     } catch (error) {
       // Catch any error from signInUser()
 
@@ -112,6 +116,7 @@ const Login = () => {
           draggable: true,
           confirmButtonColor: "#48bb78", // Optional: added a nice green color
         });
+        navigate(location.state || "/");
       })
       .catch((error) => {
         // Stop loading
