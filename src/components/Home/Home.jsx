@@ -1,7 +1,12 @@
+import LatestProducts from "../LatestProducts/LatestProducts";
+
+const latestProductsPromise = fetch(
+  `http://localhost:3001/latest-products`
+).then((res) => res.json());
 const Home = () => {
   return (
     <div>
-      <h1>This is home</h1>
+      <LatestProducts latestProductsPromise={latestProductsPromise} />
     </div>
   );
 };
